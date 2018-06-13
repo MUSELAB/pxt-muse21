@@ -1,4 +1,4 @@
-//% weight=99 color="#F59E20" icon="\uf0c3"
+//% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Muse21 {
 
     export enum inputPorts {
@@ -76,7 +76,7 @@ namespace Muse21 {
 
     //% blockId="turnoutput"
     //% block="Set Muselab %muselabtype| pin %ports| to %onoff"
-    //% weight=60
+    //% weight=65
     //% blockGap=7
     export function TurnOutput(muselabtype: muselaboutput, ports: outputPorts, onoff: digitalonoff): void {
         pins.digitalWritePin(parseInt(ports.toString()), parseInt(onoff.toString()));
