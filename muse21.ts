@@ -72,16 +72,16 @@ namespace Muse21 {
         if (parseInt(pin.toString()) < 4) {
             switch (pin) {
                 case Servo.Servo0:
-                    pins.digitalWritePin(DigitalPin.P0, parseInt(onoff.toString()));
+                    pins.digitalWritePin(DigitalPin.P0, onoff);
                     break
                 case Servo.Servo1:
-                    pins.digitalWritePin(DigitalPin.P1, parseInt(onoff.toString()));
+                    pins.digitalWritePin(DigitalPin.P1, onoff);
                     break
                 case Servo.Servo2:
-                    pins.digitalWritePin(DigitalPin.P2, parseInt(onoff.toString()));
+                    pins.digitalWritePin(DigitalPin.P2, onoff);
                     break
                 case Servo.Servo12:
-                    pins.digitalWritePin(DigitalPin.P12, parseInt(onoff.toString()));
+                    pins.digitalWritePin(DigitalPin.P12, onoff);
                     break
             }
 
@@ -112,7 +112,7 @@ namespace Muse21 {
             }
 
         } else
-            serial.writeLine("(AT+pwm?pin=" + pin + "&intensity=" + intensity + ")");            
+            serial.writeLine("(AT+pwm?pin=" + pin + "&intensity=" + intensity + ")");
 
     }
 
