@@ -10,17 +10,6 @@ namespace Muse21 {
         P2 = 9
     }
 
-    export enum outputPorts {
-        //% block="P0"
-        P0 = 7,
-        //% block="P1"
-        P1 = 8,
-        //% block="P2"
-        P2 = 9,
-        //% block="P12"
-        P12 = 19
-    }
-
     export enum digitalonoff {
         //% block="on"
         off,
@@ -75,20 +64,55 @@ namespace Muse21 {
     }
 
     //% blockId="turnoutput"
-    //% block="Set Muselab %muselabtype| pin %ports| to %onoff"
+    //% block="Set Muselab %muselabtype| pin %pin| to %onoff"
     //% weight=65
     //% blockGap=7
-    export function TurnOutput(muselabtype: muselaboutput, ports: outputPorts, onoff: digitalonoff): void {
-        pins.digitalWritePin(parseInt(ports.toString()), parseInt(onoff.toString()));
+    export function TurnOutput(muselabtype: muselaboutput, pin: Servo, onoff: digitalonoff): void {
+
+        if (parseInt(pin.toString()) < 4) {
+            switch (pin) {
+                case Servo.Servo0:
+                    pins.digitalWritePin(DigitalPin.P0, parseInt(onoff.toString()));
+                    break
+                case Servo.Servo1:
+                    pins.digitalWritePin(DigitalPin.P1, parseInt(onoff.toString()));
+                    break
+                case Servo.Servo2:
+                    pins.digitalWritePin(DigitalPin.P2, parseInt(onoff.toString()));
+                    break
+                case Servo.Servo12:
+                    pins.digitalWritePin(DigitalPin.P12, parseInt(onoff.toString()));
+                    break
+            }
+
+        } else
+            serial.writeLine("(AT+digital?pin=" + pin + "&intensity=" + digitalonoff + ")");
 
     }
 
     //% blockId="turnoutput_pwm"
-    //% block="Set Muselab %muselabtype| pin %ports| to intensity %intensity"
+    //% block="Set Muselab %muselabtype| pin %pin| to intensity %intensity"
     //% intensity.min=0 intensity.max=1023
     //% weight=60	
-    export function TurnOutputPwm(muselabtype: muselaboutput, ports: outputPorts, intensity: number): void {
-        pins.analogWritePin(parseInt(ports.toString()), intensity);
+    export function TurnOutputPwm(muselabtype: muselaboutput, pin: Servo, intensity: number): void {
+        if (parseInt(pin.toString()) < 4) {
+            switch (pin) {
+                case Servo.Servo0:
+                    pins.analogWritePin(AnalogPin.P0, intensity);
+                    break
+                case Servo.Servo1:
+                    pins.analogWritePin(AnalogPin.P1, intensity);
+                    break
+                case Servo.Servo2:
+                    pins.analogWritePin(AnalogPin.P2, intensity);
+                    break
+                case Servo.Servo12:
+                    pins.analogWritePin(AnalogPin.P12, intensity);
+                    break
+            }
+
+        } else
+            serial.writeLine("(AT+pwm?pin=" + pin + "&intensity=" + intensity + ")");            
 
     }
 
@@ -98,7 +122,7 @@ namespace Muse21 {
     //% weight=50
     //% blockGap=7	
     export function control180Servo(pin: Servo, degree: number): void {
-        if (parseInt(pin.toString()) < 4){
+        if (parseInt(pin.toString()) < 4) {
             switch (pin) {
                 case Servo.Servo0:
                     pins.servoWritePin(AnalogPin.P0, degree)
@@ -114,7 +138,7 @@ namespace Muse21 {
                     break
             }
 
-        }else
+        } else
             serial.writeLine("(AT+servo_180?pin=" + pin + "&degree=" + degree + ")");
     }
 
@@ -127,7 +151,7 @@ namespace Muse21 {
 
             switch (direction) {
                 case ServoDirection.clockwise:
-                    speed = 90 + speed/100*90;
+                    speed = 90 + speed / 100 * 90;
                     break
                 case ServoDirection.anticlockwise:
                     speed = 90 - speed / 100 * 90;
@@ -149,7 +173,7 @@ namespace Muse21 {
                     break
             }
 
-        } else{
+        } else {
 
             switch (direction) {
                 case ServoDirection.clockwise:
