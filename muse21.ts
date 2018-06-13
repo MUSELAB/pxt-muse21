@@ -86,7 +86,7 @@ namespace Muse21 {
             }
 
         } else
-            serial.writeLine("(AT+digital?pin=" + pin + "&intensity=" + digitalonoff + ")");
+            serial.writeLine("(AT+digital?pin=" + pin + "&intensity=" + onoff + ")");
 
     }
 
