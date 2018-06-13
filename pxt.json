@@ -1,0 +1,18 @@
+{
+    "name": "pxt-muse21",
+    "version": "0.0.1",
+    "description": "muselab sensor for Booster",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "ns.ts",
+        "muse21.ts"
+    ],
+    "testFiles": [
+        "tests.ts"
+    ],
+    "public": true
+}
