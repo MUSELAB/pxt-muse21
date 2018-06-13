@@ -11,9 +11,9 @@ namespace Muse21 {
     }
 
     export enum digitalonoff {
-        //% block="on"
-        off,
         //% block="off"
+        off,
+        //% block="on"
         on
     }
 
