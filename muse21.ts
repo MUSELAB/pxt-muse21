@@ -203,5 +203,13 @@ namespace Muse21 {
         let temp = parseInt(ports.toString());
         return pins.analogReadPin(temp);
     }
+	
+	//% blockId="readsound" 
+    //% block="Read Sound sensor pin %ports"
+    //% weight=43
+    export function ReadSoundSensor(ports: inputPorts): number {
+        let temp = parseInt(ports.toString());
+        return pins.map(Math.abs(pins.analogReadPin(temp) - 512),0,512,0,1023);
+    }
 
 }
