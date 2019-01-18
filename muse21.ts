@@ -229,10 +229,9 @@ namespace Muse21 {
      * @param unit desired conversion unit
      * @param maxCmDistance maximum distance in centimeters (default is 500)
      */
-    //%subcategory=More
     //% blockId=Ultrasonic_Sensor
     //%block="ping trig %trig|echo %echo|unit %unit"
-	//% weight=13
+	//% weight=42
     export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
