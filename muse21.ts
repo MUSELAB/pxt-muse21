@@ -1,3 +1,32 @@
+let table = [
+    841.6633,791.9993,745.582,702.1797,661.5781,
+    623.5794,588.0013,554.6749,523.4445,494.1656,
+    466.7047,440.9383,416.7518,394.0392,372.7019,
+    352.6489,333.7953,316.0625,299.3774,283.6722,
+    268.8838,254.9534,241.8264,229.452,217.7828,
+    206.7746,196.3865,186.5799,177.3192,168.571,
+    160.3041,152.4894,145.0997,138.1096,131.4954,
+    125.2348,119.307,113.6926,108.3733,103.3321,
+    98.5529,94.0209,89.7218,85.6425,81.7707,
+    78.0947,74.6035,71.2871,68.1356,65.1402,
+    62.2922,59.5837,57.0071,54.5553,52.2217,
+    50,47.8843,45.8689,43.9487,42.1186,40.3741,
+    38.7106,37.1241,35.6106,34.1663,32.7878,
+    31.4718,30.2152,29.0149,27.8682,26.7725,
+    25.7252,24.7239,23.7665,22.8508,21.9748,
+    21.1366,20.3343,19.5664,18.8311,18.1269,
+    17.4524,16.8062,16.1869,15.5933,15.0243,
+    14.4787,13.9554,13.4534,12.9718,12.5097,
+    12.0661,11.6403,11.2315,10.8388,10.4617,
+    10.0994,9.7512,9.4167,9.095,8.7858,
+    8.4885,8.2026,7.9275,7.6629,7.4083,
+    7.1632,6.9273,6.7002,6.4816,6.271,
+    6.0682,5.8727,5.6845,5.503,5.3281,
+    5.1596,4.997,4.8403,4.6891,4.5433,
+    4.4027,4.267,4.136,4.0096,3.8875,
+    3.7697,3.656,3.5461,3.44,3.3375
+]
+
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Muse21 {
 
@@ -63,6 +92,22 @@ namespace Muse21 {
 
     }
 
+    export enum TMP36Type {
+        //% block="(℃)" enumval=0
+        TMP36_temperature_C,
+    
+        //% block="(℉)" enumval=1
+        TMP36_temperature_F
+    }
+
+    export enum NTCType {
+        //% block="(℃)" enumval=0
+        NTC_temperature_C,
+    
+        //% block="(℉)" enumval=1
+        NTC_temperature_F
+    }
+    
     export enum PingUnit {
         //% block="μs"
         MicroSeconds,
@@ -221,7 +266,6 @@ namespace Muse21 {
         return pins.map(Math.abs(pins.analogReadPin(temp) - 512),0,512,0,1023);
     }
 
-
     /**
      * Send a ping and get the echo time (in microseconds) as a result
      * @param trig tigger pin
@@ -250,5 +294,83 @@ namespace Muse21 {
             default: return d ;
         }
     }
-
+    
+    /**
+     * TODO: get TMP36 Temperature(℃ or ℉)
+     * @param temppin describe parameter here, eg: AnalogPin.P1
+     */
+    //% blockId="readtemp" block="Thermometer（Air） %tmp36type|at pin %temppin"
+    export function Thermometer_Air(tmp36type: TMP36Type, temppin: AnalogPin): number {
+        let voltage = 0;
+        let Temperature = 0;
+        let Reference_VOLTAGE = 3100;
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        voltage = pins.map(
+            pins.analogReadPin(temppin),
+            0,
+            1023,
+            0,
+            Reference_VOLTAGE
+        );
+        Temperature = (voltage - 500) / 10;
+        
+        switch (tmp36type) {
+            case 0:
+                return Math.round(Temperature)
+                break;
+            case 1:
+                return Math.round(Temperature * 9 / 5 + 32)
+                break;
+            default:
+                return 0
+        }
+    }
+    
+    /**
+     * NTC mudule
+    **/
+    /**
+     * TODO: get NTC Temperature(℃ or ℉)
+     * @param temppin describe parameter here, eg: AnalogPin.P1
+    **/
+    //% blockId="readntctemp" block="Thermometer（Liquid） %ntctype|at pin %temppin"
+    export function Thermometer_Liquid(ntctype: NTCType, temppin: AnalogPin): number {
+        let voltage = 0;
+        let Reference_VOLTAGE = 3100;
+        let Temperature = 0;
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        voltage = pins.map(
+            pins.analogReadPin(temppin),
+            0,
+            1023,
+            0,
+            Reference_VOLTAGE
+        );
+        for (let i = 0; i < table.length; i++) {
+            Temperature=((table[i]/(table[i]+50))*3.3)/3.3*1023
+            if (Temperature < voltage){
+                switch (ntctype) {
+                    case 0:
+                        return i-30
+                        break;
+                    case 1:
+                        return (i-30)* 9 / 5 + 32
+                        break;
+                    default:
+                        return 0
+                }
+            }
+        }
+        switch (ntctype) {
+            case 0:
+                return 100-30
+                break;
+            case 1:
+                return (100-30)* 9 / 5 + 32
+                break;
+            default:
+                return 0
+        }
+    }
 }
+
