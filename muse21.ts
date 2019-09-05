@@ -304,7 +304,6 @@ namespace Muse21 {
         let voltage = 0;
         let Temperature = 0;
         let Reference_VOLTAGE = 3100;
-        pins.digitalWritePin(DigitalPin.P0, 0)
         voltage = pins.map(
             pins.analogReadPin(temppin),
             0,
@@ -336,16 +335,9 @@ namespace Muse21 {
     //% blockId="readntctemp" block="Thermometer（Liquid） %ntctype|at pin %temppin"
     export function Thermometer_Liquid(ntctype: NTCType, temppin: AnalogPin): number {
         let voltage = 0;
-        let Reference_VOLTAGE = 3100;
         let Temperature = 0;
-        pins.digitalWritePin(DigitalPin.P0, 0)
-        voltage = pins.map(
-            pins.analogReadPin(temppin),
-            0,
-            1023,
-            0,
-            Reference_VOLTAGE
-        );
+        
+        voltage = pins.analogReadPin(temppin)
         for (let i = 0; i < table.length; i++) {
             Temperature=((table[i]/(table[i]+50))*3.3)/3.3*1023
             if (Temperature < voltage){
