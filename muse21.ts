@@ -258,7 +258,7 @@ namespace Muse21 {
         return pins.analogReadPin(temp);
     }
 	
-	//% blockId="readsound" 
+	//% blockId="readsoundV1" 
     //% block="Read Sound sensorV1 pin %ports"
     //% weight=43
     export function ReadSoundSensorV1(ports: inputPorts): number {
@@ -266,7 +266,7 @@ namespace Muse21 {
         return pins.map(Math.abs(pins.analogReadPin(temp) - 512),0,512,0,1023);
     }
 
-    //% blockId="readsound" 
+    //% blockId="readsoundV2" 
     //% block="Read Sound sensorV2 pin %ports"
     //% weight=43
     export function ReadSoundSensorV2(ports: inputPorts): number {
