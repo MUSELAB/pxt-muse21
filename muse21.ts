@@ -259,7 +259,7 @@ namespace Muse21 {
     }
 	
 	//% blockId="readsoundV1" 
-    //% block="Read Sound sensorV1 pin %ports"
+    //% block="Read Sound sensor V1 pin %ports"
     //% weight=43
     export function ReadSoundSensorV1(ports: inputPorts): number {
         let temp = parseInt(ports.toString());
@@ -267,7 +267,7 @@ namespace Muse21 {
     }
 
     //% blockId="readsoundV2" 
-    //% block="Read Sound sensorV2 pin %ports"
+    //% block="Read Sound sensor V2 pin %ports"
     //% weight=43
     export function ReadSoundSensorV2(ports: inputPorts): number {
         let temp = parseInt(ports.toString());
