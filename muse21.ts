@@ -276,8 +276,8 @@ namespace Muse21 {
 
     /**
      * Send a ping and get the echo time (in microseconds) as a result
-     * @param trig tigger pin
-     * @param echo echo pin
+     * @param trig tigger AnalogPin.P13
+     * @param echo echo AnalogPin.P12
      * @param unit desired conversion unit
      * @param maxCmDistance maximum distance in centimeters (default is 500)
      */
@@ -297,8 +297,8 @@ namespace Muse21 {
         const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
 
         switch (unit) {
-            case PingUnit.Centimeters: return Math.idiv(d, 58);
-            case PingUnit.Inches: return Math.idiv(d, 148);
+            case PingUnit.Centimeters: return （Math.idiv(d, 58)+3）;
+            case PingUnit.Inches: return （Math.idiv(d, 148)+1）;
             default: return d ;
         }
     }
