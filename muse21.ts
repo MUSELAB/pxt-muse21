@@ -297,8 +297,8 @@ namespace Muse21 {
         const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
 
         switch (unit) {
-            case PingUnit.Centimeters: return （Math.idiv(d, 58)+3）;
-            case PingUnit.Inches: return （Math.idiv(d, 148)+1）;
+            case PingUnit.Centimeters: return Math.idiv(d, 58)+3;
+            case PingUnit.Inches: return Math.idiv(d, 148)+1;
             default: return d ;
         }
     }
