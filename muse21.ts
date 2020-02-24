@@ -276,8 +276,8 @@ namespace Muse21 {
 
     /**
      * Send a ping and get the echo time (in microseconds) as a result
-     * @param trig tigger AnalogPin.P13
-     * @param echo echo AnalogPin.P12
+     * @param trig describe parameter here, eg: DigitalPin.P13
+     * @param echo describe parameter here, eg: DigitalPin.P12
      * @param unit desired conversion unit
      * @param maxCmDistance maximum distance in centimeters (default is 500)
      */
