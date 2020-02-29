@@ -268,7 +268,7 @@ namespace Muse21 {
 
     //% blockId="readsoundV2" 
     //% block="Read Sound sensor V2 pin %ports"
-    //% weight=43
+    //% weight=43+
     export function ReadSoundSensorV2(ports: inputPorts): number {
         let temp = parseInt(ports.toString());
         return pins.analogReadPin(temp);
@@ -372,5 +372,44 @@ namespace Muse21 {
                 return 0
         }
     }
+
+
+    /**
+     * EC mudule
+     **/
+    /**
+     * TODO：get EC value
+     * @param temppin describe parameter here, eg: AnalogPin.P0
+     **/
+      //% blockId="readectemp" block="Electrical conductivity at pin %temppin"
+      export function Electrical_conductivity(temppin: AnalogPin): number {
+        let voltage = 0;
+        let Electrical = 0;
+        
+        voltage = pins.analogReadPin(temppin);
+        voltage = voltage*3.3/1024;
+        Electrical= voltage*0.5*1.8*2;
+        return Electrical
+      }
+
+
+          /**
+     * EC mudule
+     **/
+    /**
+     * TODO：get PH value
+     * @param temppin describe parameter here, eg: AnalogPin.P0
+     **/
+      //% blockId="readectemp" block="get PH value at pin %temppin"
+      export function get_ph(temppin: AnalogPin): number {
+        let voltage = 0;
+        let phvlaue = 0;
+        
+        voltage = pins.analogReadPin(temppin);
+        voltage = voltage*3.3/1024;
+        phvlaue= 24.7-voltage/6*1000/113
+        return phvlaue
+      }
 }
+
 
