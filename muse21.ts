@@ -394,14 +394,14 @@ namespace Muse21 {
 
 
           /**
-     * EC mudule
+     * PH mudule
      **/
     /**
      * TODO：get PH value
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
       //% blockId="readectemp" block="get PH value at pin %temppin"
-      export function get_ph(temppin: AnalogPin): number {
+      export function Get_Ph(temppin: AnalogPin): number {
         let voltage = 0;
         let phvlaue = 0;
         
@@ -411,5 +411,3 @@ namespace Muse21 {
         return phvlaue
       }
 }
-
-
