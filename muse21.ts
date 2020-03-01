@@ -392,20 +392,11 @@ namespace Muse21 {
         return Electrical
       }
 
-
-
-          //% blockId="readinput" 
-    //% block="Read Muselab sensor pin %ports"
-    //% weight=44
-    export function ReadInputSensor(ports: inputPorts): number {
-        let temp = parseInt(ports.toString());
-        return pins.analogReadPin(temp);
-    }
-          /**
+    /**
      * PH mudule
      **/
     /**
-     * TODO：get PH value
+     * TODO：get PH value1
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
       //% blockId="readphtemp" block="get PH value at pin %temppin"
