@@ -393,6 +393,14 @@ namespace Muse21 {
       }
 
 
+
+          //% blockId="readinput" 
+    //% block="Read Muselab sensor pin %ports"
+    //% weight=44
+    export function ReadInputSensor(ports: inputPorts): number {
+        let temp = parseInt(ports.toString());
+        return pins.analogReadPin(temp);
+    }
           /**
      * PH mudule
      **/
@@ -407,7 +415,7 @@ namespace Muse21 {
         
         voltage = pins.analogReadPin(temppin);
         voltage = voltage*3.3/1024;
-        phvlaue= 24.7-voltage/6*1000/113
+        phvlaue= 3.52*voltage-1.7688
         return phvlaue
       }
 }
