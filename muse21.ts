@@ -407,7 +407,6 @@ namespace Muse21 {
         voltage = pins.analogReadPin(temppin);
         voltage = voltage*3.3/1024;
         phvlaue= 3.52*voltage-1.7688;
-        phvlaue = phvlaue.toFixed(1);
         return phvlaue
       }
 }
