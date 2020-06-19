@@ -253,7 +253,7 @@ namespace Muse21 {
     //% blockId="readinput" 
     //% block="Read Muselab sensor pin %ports"
     //% weight=44
-    export function ReadInputSensor(ports: inputPorts): number {
+    export function ReadInputSensor(ports: AnalogPin): number {
         let temp = parseInt(ports.toString());
         return pins.analogReadPin(temp);
     }
@@ -261,7 +261,7 @@ namespace Muse21 {
 	//% blockId="readsoundV1" 
     //% block="Read Sound sensor V1 pin %ports"
     //% weight=43
-    export function ReadSoundSensorV1(ports: inputPorts): number {
+    export function ReadSoundSensorV1(ports: AnalogPin): number {
         let temp = parseInt(ports.toString());
         return pins.map(Math.abs(pins.analogReadPin(temp) - 512),0,512,0,1023);
     }
@@ -269,7 +269,7 @@ namespace Muse21 {
     //% blockId="readsoundV2" 
     //% block="Read Sound sensor V2 pin %ports"
     //% weight=43+
-    export function ReadSoundSensorV2(ports: inputPorts): number {
+    export function ReadSoundSensorV2(ports: AnalogPin): number {
         let temp = parseInt(ports.toString());
         return pins.analogReadPin(temp);
     }
@@ -391,12 +391,11 @@ namespace Muse21 {
         Electrical= voltage*0.5*1.8*2;
         return Electrical
       }
-
     /**
      * PH mudule
      **/
     /**
-     * TODO：get PH value1
+     * TODO：get PH value
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
       //% blockId="readphtemp" block="get PH value at pin %temppin"
