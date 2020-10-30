@@ -590,7 +590,7 @@ namespace Muse_I2C_RS485 {
      * @param s3 s3 (in pixels)
      * @param s4 s4 (in pixels)
      * @param s5 s5 (in pixels)
-     * @param s6 s62 (in pixels)
+     * @param s6 s6 (in pixels)
      * @param s7 s7 (in pixels)
      * @param s8 s8 (in pixels)
      */
