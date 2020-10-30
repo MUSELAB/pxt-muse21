@@ -592,9 +592,9 @@ namespace Muse_I2C_RS485 {
 
     //%blockId=Get RS485 DATA
     //% block="RS485 DATA s1 %s1|s2 %s2|s3 %s3|s4 %s4|s5 %s5|s6 %s6|s7 %s7|s8 %s8"
-    //% weight=90   
+    //% weight=90
     //% blockGap=8
-    export function PH_value(s1: number ,s2:number,s3:number,s4:number,s5:number,s6:number,s7:number,s8:number): string {
+    export function Get_RS485_DATA(s1: number ,s2:number,s3:number,s4:number,s5:number,s6:number,s7:number,s8:number): string {
         
         return ouput1(s1,s2,s3,s4,s5,s6,s7,s8)
     }
