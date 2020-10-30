@@ -583,16 +583,27 @@ namespace Muse_I2C_RS485 {
                 return re
             }
   
-     /**
-     * Get RS485 Data from sensor
-     */
-    //%blockId=Get RS485 Data
-    //% block="Get RS485 Data %u"
-    //% u.defl=Get RS485 Data
+    /**
+     * Get RS485 DATA
+     * @param s1 s1 (in pixels)
+     * @param s2 s2 (in pixels)
+     * @param s3 s3 (in pixels)
+     * @param s4 s4 (in pixels)
+     * @param s5 s5 (in pixels)
+     * @param s6 s62 (in pixels)
+     * @param s7 s7 (in pixels)
+     * @param s8 s8 (in pixels)
+     */
+
+    //% icon="\uf1ec" 
+    //% block="GET RS485 DATA s1 %s1|s2 %s2|s3 %s3|s4 %s4|s5 %s5|s6 %s6|s7 %s7|s8 %s8"
+    //% weight=90   
+    //% blockGap=8
     export function Get_RS485_Data(s1: number ,s2:number,s3:number,s4:number,s5:number,s6:number,s7:number,s8:number): string {
         
         return ouput1(s1,s2,s3,s4,s5,s6,s7,s8)
     }
+
     /**
      * get PH_value from sensor
      */
