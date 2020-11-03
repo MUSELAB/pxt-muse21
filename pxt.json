@@ -1,6 +1,6 @@
 {
     "name": "pxt-muse21",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "muselab sensor for Booster",
     "license": "MIT",
     "dependencies": {

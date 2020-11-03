@@ -511,6 +511,45 @@ namespace Digital_Sensor{
          return re
        
     }
+    function ouput(): number {
+        let tb = pins.createBuffer(8)//Define IIC send data buffer
+        let ta = pins.createBuffer(9)//Define IIC accept data buffer 0x01,0x03,0x00,0x01,0x00,0x02,0x95,0xCB
+        let tc=[]                  
+ 
+        tb[0] = 0x01
+        tb[1] = 0x03
+        tb[2] = 0x00
+        tb[3] = 0x01
+        tb[4] = 0x00
+        tb[5] = 0x02
+        tb[6] = 0x95
+        tb[7] = 0xCB        
+        pins.i2cWriteBuffer(0X01, tb);
+        ta = pins.i2cReadBuffer(0X01, 9);
+        tc[0] = ta[5]
+        tc[1] = ta[6]
+        tc[2] = ta[3]
+        tc[3] = ta[4]
+        let a1= ""
+        let a2= ""
+        let a3= ""
+        let a4= ""
+       //Converts a decimal number to a hexadecimal string 
+        a1=Convert_string(Math.floor(tc[0]/16))+Convert_string(tc[0]%16)
+        a2=Convert_string(Math.floor(tc[1]/16))+Convert_string(tc[1]%16)
+        a3=Convert_string(Math.floor(tc[2]/16))+Convert_string(tc[2]%16)
+        a4=Convert_string(Math.floor(tc[3]/16))+Convert_string(tc[3]%16)
+        //String splicing
+        a1=a1.concat(a2.concat(a3).concat(a4))
+        //Calculation formula of converting string to floating point type
+        let b = parseInt(a1,16);
+        let s = b&0x80000000/0x80000000;
+        let e = (b&0x7f800000)/0x800000-127;
+        let c = (b&0x7fffff)/0x800000;
+        let re =Math.abs(Math.pow(-1,s)*(1+c)*Math.pow(2,e))-0.01;
+        return re
+        
+    }
 
     function ouput1(s1: number ,s2:number,s3:number,s4:number,s5:number,s6:number,s7:number,s8:number): string {
                 let tb = pins.createBuffer(8)//Define IIC send data buffer
@@ -562,45 +601,42 @@ namespace Digital_Sensor{
                 return re
             }
          /**
-        * get PH_value from sensor
+        * get Get_PH_VALUE from sensor
         */
-       //%blockId=Get_RS485_DATA
-       //% block="Get_RS485_DATA s1 %s1|s2 %s2|s3 %s3|s4 %s4|s5 %s5|s6 %s6|s7 %s7|s8 %s8"
+       //%blockId=Get_PH_VALUE
+       //% block="Get_PH_VALUE
        
-       //% u.defl=Get_RS485_DATA
+       //% u.defl=Get_PH_VALUE
        //% weight=120	
        //% blockGap=8
-       export function Get_RS485_DATA(s1: number ,s2:number,s3:number,s4:number,s5:number,s6:number,s7:number,s8:number): string {
+       export function Get_PH_VALUE():number{
            
-            return ouput1(s1,s2,s3,s4,s5,s6,s7,s8)
-       }
-         /**
-     * PH mudule
-     **/
-    /**
-     * TODO：get PH value
-     * @param temppin describe parameter here, eg: AnalogPin.P0
-     **/
-      //% blockId="readphtemp" block="get PH value at pin %temppin"
-      export function Get_Ph(temppin: AnalogPin): number {
-        let voltage = 0;
-        let phvlaue = 0;
-        
-        voltage = pins.analogReadPin(temppin);
-        voltage = voltage*3.3/1024;
-        phvlaue= 3.52*voltage-1.7688;
-        return phvlaue
-      }
-      /**
-        * get PH_value from sensor
+            return ouput()
+       }
+        /**
+        * get RS485 DATA from sensor
         */
-       //%blockId=test
-       //% block="test DATA %DATA"
+       //%blockId=Get_RS485_DATAV1
+       //% block="Get_RS485_DATA Device_address %s1|Function_code %s2|Start_Address_High_Byte %s3|Start_Address_Low_Byte %s4|Register_number_High_Byte %s5|Register_number_Low_Byte %s6|CRC_High_Byte %s7|CRC_Low_Byte %s8"
        
-       //% u.defl=test
+       //% u.defl=Get_RS485_DATAV1
        //% weight=120	
        //% blockGap=8
-    export function Get_RS485_DATA_V1(DATA:string): string { 
+       export function Get_RS485_DATAV1(Device_address: number ,Function_code:number,Start_Address_High_Byte:number,Start_Address_Low_Byte:number,Register_number_High_Byte:number,Register_number_Low_Byte:number,CRC_High_Byte:number,CRC_Low_Byte:number): string {
+           
+                 return ouput1(Device_address,Function_code,Start_Address_High_Byte,Start_Address_Low_Byte,Register_number_High_Byte,Register_number_Low_Byte,CRC_High_Byte,CRC_Low_Byte)
+            }
+   
+        /**
+        * get RS485 DATA from sensor
+        */
+       //%blockId=Get_RS485_DATAV2
+       //% block="Get_RS485_DATAV2 %DATA"
+       
+       //% u.defl=Get_RS485_DATAV2
+       //% weight=120	
+       //% blockGap=8
+       export function Get_RS485_DATAV2(DATA:string): string { 
        return change(DATA)
     }
 
