@@ -604,7 +604,7 @@ namespace Digital_Sensor{
         * get Get_PH_VALUE from sensor
         */
        //%blockId=Get_PH_VALUE
-       //% block="Get_PH_VALUE
+       //% block=Get_PH_VALUE
        
        //% u.defl=Get_PH_VALUE
        //% weight=120	
