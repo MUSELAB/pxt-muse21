@@ -409,6 +409,30 @@ namespace Muse21 {
         return phvlaue
       }
 
+    //% blockId="Rotational Speed" 
+    //% block="Read Muselab Rotational Speed %ports"
+    //% weight=44
+    export function Rotational_Speed(ports: AnalogPin): number {
+        let temp = parseInt(ports.toString());
+        return pins.analogReadPin(temp);
+    }
+
+    //% blockId="Threshold" 
+    //% block="Read Muselab Threshold pin %ports"
+    //% weight=44
+    export function Threshold(ports: AnalogPin): number {
+        let temp = parseInt(ports.toString());
+        return pins.analogReadPin(temp);
+    }
+
+    //% blockId="Pin" 
+    //% block="Read Muselab Pin %ports"
+    //% weight=44
+    export function Pin(ports: AnalogPin): number {
+        let temp = parseInt(ports.toString());
+        return pins.analogReadPin(temp);
+    }
+
       
 }
 //% weight=100 color="#F59E20" icon="\uf0c3"
