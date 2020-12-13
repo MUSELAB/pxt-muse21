@@ -27,6 +27,16 @@ let table = [
     3.7697,3.656,3.5461,3.44,3.3375
 ]
 
+export function sumTimeInData () :number {
+    let sumTime = 0
+    let i = 0
+    let dataList: number[] = []
+    for (let i of dataList) {
+        sumTime += i
+    }
+    return sumTime
+}
+
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Muse21 {
   
@@ -398,7 +408,7 @@ namespace Muse21 {
      * TODO：get PH value
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-      //% blockId="readphtemp" block="get PH value at pin %temppin"
+    //% blockId="readphtemp" block="get PH value at pin %temppin"
       export function Get_Ph(temppin: AnalogPin): number {
         let voltage = 0;
         let phvlaue = 0;
@@ -409,18 +419,6 @@ namespace Muse21 {
         return phvlaue
       }
 
-
-
-    export function sumTimeInData () :number {
-        let sumTime = 0
-        let i = 0
-        let dataList: number[] = []
-        for (let i of dataList) {
-            sumTime += i
-        }
-        return sumTime
-    }
-
     /**
      * Rotation per second
      **/
@@ -428,9 +426,44 @@ namespace Muse21 {
      * TODO：Rotation per second
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-      //% blockId="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
+    //% blockId="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
     export function Pulse_RPS(temppin: AnalogPin, Checker: number, Threshold: number): number {
-            return 1
+        let i = 0
+        let sumTime = 0
+        let dataList: number[] = []
+        let cache = 0
+        let temp = parseInt(temppin.toString());
+        temp = pins.analogReadPin(temp);
+        
+        if (temp >= 30) {
+            cache = 1
+        } else if (temp < 30) {
+            cache = 0
+        }
+        while(1)
+        {
+            let lastTime = control.millis()
+            dataList = []
+            dataList.unshift(control.millis() - lastTime)
+
+             if (temp >= 30 && cache == 0) {
+                cache = 1
+                dataList.unshift(0)
+                lastTime = control.millis()
+            } else if (temp < 30 && cache == 1) {
+                cache = 0
+                dataList.unshift(0)
+                lastTime = control.millis();
+            } else {
+                dataList[0] = control.millis() - lastTime
+            }
+        
+           if (dataList.length > 2 && sumTimeInData() > 3000) {
+                dataList.pop()
+                break
+            }
+        }
+        return dataList.length / 8 / (sumTimeInData() / 1000)
     }
     
       
