@@ -421,13 +421,14 @@ namespace Muse21 {
         return sumTime
     }
 
-    //%blockId=Rotation per second
-    /** 
-    *%block="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
-    * @param temppin describe parameter here, eg: AnalogPin.P0
-    * **/
-    //% speed.min=0 speed.max=100
-    //% weight=45	
+    /**
+     * Rotation per second
+     **/
+    /**
+     * TODO：Rotation per second
+     * @param temppin describe parameter here, eg: AnalogPin.P0
+     **/
+      //% blockId="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
     export function Pulse_RPS(temppin: AnalogPin, Checker: number, Threshold: number): number {
         let i = 0
         let sumTime = 0
