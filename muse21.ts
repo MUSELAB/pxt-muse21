@@ -27,7 +27,7 @@ let table = [
     3.7697,3.656,3.5461,3.44,3.3375
 ]
 
-export function sumTimeInData () :number {
+function sumTimeInData () :number {
     let sumTime = 0
     let i = 0
     let dataList: number[] = []
