@@ -427,7 +427,7 @@ namespace Muse21 {
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
     //% blockId="Pulse-RPS" block="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
-    export function Pulse_RPS(temppin: AnalogPin, Checker: number, Threshold: number): number {
+    export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin): number {
         let i = 0
         let sumTime = 0
         let dataList: number[] = []
