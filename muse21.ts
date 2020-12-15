@@ -27,16 +27,6 @@ let table = [
     3.7697,3.656,3.5461,3.44,3.3375
 ]
 
-function sumTimeInData () :number {
-    let sumTime = 0
-    let i = 0
-    let dataList: number[] = []
-    for (let i of dataList) {
-        sumTime += i
-    }
-    return sumTime
-}
-
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Muse21 {
   
@@ -426,44 +416,33 @@ namespace Muse21 {
      * TODO：Rotation per second
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-    //% blockId="Pulse-RPS" block="Pulse-RPS Checker %Checker | Threshold %Threshold | Pin %temppin"
-    export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin): number {
-        let i = 0
-        let sumTime = 0
-        let dataList: number[] = []
-        let cache = 0
-        let temp = parseInt(temppin.toString());
-        temp = pins.analogReadPin(temp);
+    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker | Checker and %Threshold | Threshold value from Pin %temppin ;The last result %lastResult |"
+    export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin,lastResult : number): number {
+		let time_startingTime = control.millis();
+        let temp_pin = parseInt(temppin.toString());
+		let temp_lasttime = 1000/(8*Math.max(lastResult,0.03));
+		let cache = 0;
+		let RPC = 1/Checker;
+        let temp_pin_value = pins.analogReadPin(temp_pin);
         
-        if (temp >= 30) {
-            cache = 1
-        } else if (temp < 30) {
-            cache = 0
+        if (temp_pin_value > Threshold) {
+            cache = 1;
+        } else if (temp_pin_value <= Threshold) {
+            cache = 0;
         }
         while(1)
         {
-            let lastTime = control.millis()
-            dataList = []
-            dataList.unshift(control.millis() - lastTime)
-
-             if (temp >= 30 && cache == 0) {
-                cache = 1
-                dataList.unshift(0)
-                lastTime = control.millis()
-            } else if (temp < 30 && cache == 1) {
-                cache = 0
-                dataList.unshift(0)
-                lastTime = control.millis();
-            } else {
-                dataList[0] = control.millis() - lastTime
-            }
-        
-           if (dataList.length > 2 && sumTimeInData() > 3000) {
-                dataList.pop()
-                break
-            }
+			temp_pin_value = pins.analogReadPin(temp_pin)
+			if(cache == 0 && temp_pin_value > Threshold){
+				if(temp_lasttime > 623){temp_lasttime = 623};
+				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
+			} elseif (cache == 1 && temp_pin_value <= Threshold){
+				if(temp_lasttime > 623){temp_lasttime = 623};
+				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
+			} elseif (control.millis()-time_startingTime >15){
+				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/1000) ;
+			}
         }
-        return dataList.length / 8 / (sumTimeInData() / 1000)
     }
     
       
