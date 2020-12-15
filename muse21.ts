@@ -436,10 +436,10 @@ namespace Muse21 {
 			if(cache == 0 && temp_pin_value > Threshold){
 				if(temp_lasttime > 623){temp_lasttime = 623};
 				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
-			} elseif (cache == 1 && temp_pin_value <= Threshold){
+			} else if (cache == 1 && temp_pin_value <= Threshold){
 				if(temp_lasttime > 623){temp_lasttime = 623};
 				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
-			} elseif (control.millis()-time_startingTime >15){
+			} else if (control.millis()-time_startingTime >15){
 				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/1000) ;
 			}
         }
