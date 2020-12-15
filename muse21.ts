@@ -416,7 +416,7 @@ namespace Muse21 {
      * TODO：Rotation per second
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker | Checker and %Threshold | Threshold value from Pin %temppin ;The last result %lastResult |"
+    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker | Checker and %Threshold | Threshold value from Pin %temppin | The last result %lastResult "
     export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin,lastResult : number): number {
 		let time_startingTime = control.millis();
         let temp_pin = parseInt(temppin.toString());
@@ -434,16 +434,16 @@ namespace Muse21 {
         {
 			temp_pin_value = pins.analogReadPin(temp_pin)
 			if(cache == 0 && temp_pin_value > Threshold){
-				if(temp_lasttime > 623){temp_lasttime = 623};
-				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
+				if(temp_lasttime > 316){temp_lasttime = 316};
+				return (RPC)/((temp_lasttime*9+control.millis()-time_startingTime)/10/1000);
 			} else if (cache == 1 && temp_pin_value <= Threshold){
-				if(temp_lasttime > 623){temp_lasttime = 623};
-				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
+				if(temp_lasttime > 316){temp_lasttime = 316};
+				return (RPC)/((temp_lasttime*9+control.millis()-time_startingTime)/10/1000);
 			} else if (control.millis()-time_startingTime >15){
-				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/1000) ;
-            }
+				return (RPC)/((temp_lasttime+(control.millis()-time_startingTime)/10)/1000) ;
+			}
         }
-        return 0;
+		return 0;
     }
     
       
