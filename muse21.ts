@@ -441,8 +441,9 @@ namespace Muse21 {
 				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/2/1000);
 			} else if (control.millis()-time_startingTime >15){
 				return (1/Checker)/((temp_lasttime+control.millis()-time_startingTime)/1000) ;
-			}
+            }
         }
+        return 0;
     }
     
       
