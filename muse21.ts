@@ -416,34 +416,123 @@ namespace Muse21 {
      * TODO：Rotation per second
      * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker|Checker and %Threshold|Threshold value from Pin %temppin|The last result %lastResult "
-    export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin,lastResult : number): number {
-		let time_startingTime = control.millis();
+    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker Checker and %Threshold Threshold value from Pin %temppin "
+    export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin): number {
+		let time_startingTime = input.runningTime();
         let temp_pin = parseInt(temppin.toString());
-		let temp_lasttime = 1000/(8*Math.max(lastResult,0.03));
 		let cache = 0;
-		let RPC = 1/Checker;
         let temp_pin_value = pins.analogReadPin(temp_pin);
+        let howmanytimes = 0;
         
         if (temp_pin_value > Threshold) {
             cache = 1;
         } else if (temp_pin_value <= Threshold) {
             cache = 0;
         }
-        while(1)
-        {
-			temp_pin_value = pins.analogReadPin(temp_pin)
-			if(cache == 0 && temp_pin_value > Threshold){
-				if(temp_lasttime > 316){temp_lasttime = 316};
-				return (RPC)/((temp_lasttime*9+control.millis()-time_startingTime)/10/1000);
-			} else if (cache == 1 && temp_pin_value <= Threshold){
-				if(temp_lasttime > 316){temp_lasttime = 316};
-				return (RPC)/((temp_lasttime*9+control.millis()-time_startingTime)/10/1000);
-			} else if (control.millis()-time_startingTime >15){
-				return (RPC)/((temp_lasttime+(control.millis()-time_startingTime))/1000) ;
-			}
+        while(1){
+            temp_pin_value = pins.analogReadPin(temp_pin);
+            if(cache == 1 && temp_pin_value <= Threshold){
+                cache = 0;
+                howmanytimes +=1;
+            } else if (cache == 0 && temp_pin_value > Threshold){
+                cache = 1;
+                howmanytimes +=1;
+            }
+            if(input.runningTime()-time_startingTime >= 1000){
+                break;
+            }
         }
-		return 0;
+		return howmanytimes/Checker/((input.runningTime()-time_startingTime)/1000);
+    }
+	
+	/**
+     * Wind Direction Number
+     **/
+    /**
+     * To get the wind direction(Number) from three pin.
+     **/
+    //% blockId="block_getWindDirection_N" block="Get the wind direction(Number) from 8-Checker Pin %temppin0 4-Checker Pin %temppin1 2-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
+    export function function_getWindDirection_N(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): number {
+		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
+		let temp_pin1_value = pins.analogReadPin(parseInt(temppin1.toString()));
+		let temp_pin2_value = pins.analogReadPin(parseInt(temppin2.toString()));
+		let direction = 0;
+		if (temp_pin0_value < Threshold) {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = 0;
+				} else {
+					direction = 2;
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = 4;
+				} else {
+					direction = 6;
+				}
+			}
+		} else {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = 3;
+				} else {
+					direction = 1;
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = 5;
+				} else {
+					direction = 7;
+				}
+			}
+		}
+		return direction;
+    }
+
+    /**
+     * Wind Directtion Word
+     **/
+    /**
+     * To get the wind direction(Word) from three pin.
+     **/
+    //% blockId="block_getWindDirection_W" block="Get the wind direction(Word) from 8-Checker Pin %temppin0 4-Checker Pin %temppin1 2-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
+    export function function_getWindDirection_W(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): string {
+		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
+		let temp_pin1_value = pins.analogReadPin(parseInt(temppin1.toString()));
+		let temp_pin2_value = pins.analogReadPin(parseInt(temppin2.toString()));
+		let direction = "";
+		if (temp_pin0_value < Threshold) {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = "N";
+				} else {
+					direction = "E";
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = "S";
+				} else {
+					direction = "W";
+				}
+			}
+		} else {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = "SE";
+				} else {
+					direction = "NE";
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = "SW";
+				} else {
+					direction = "NW";
+				}
+			}
+		}
+		return direction;
     }
     
       
