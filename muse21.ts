@@ -414,10 +414,10 @@ namespace Muse21 {
      **/
     /**
      * TODO：Rotation per second
-     * @param temppin describe parameter here, eg: AnalogPin.P0
      **/
-    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with %Checker Checker and %Threshold Threshold value from Pin %temppin "
+    //% blockId="Pulse-RPS" block="get Pulse-Rotation per Second with |Checker: %Checker Threshold: %Threshold from Pin %temppin"
 	//% Checker.defl=8 Threshold.defl=30 temppin.defl=AnalogPin.P0
+    //% inlineInputMode=external
     export function Pulse_RPS( Checker: number,Threshold: number,temppin: AnalogPin): number {
 		let time_startingTime = input.runningTime();
         let temp_pin = parseInt(temppin.toString());
@@ -452,7 +452,7 @@ namespace Muse21 {
     /**
      * To get the wind direction(Number) from three pin.
      **/
-    //% blockId="block_getWindDirection_N" block="Get the wind direction(Number) from 8-Checker Pin %temppin0 2-Checker Pin %temppin1 4-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% blockId="block_getWindDirection_N" block="Get the wind direction(Number) from |8-Checker Pin %temppin0 2-Checker Pin %temppin1 4-Checker Pin %temppin2 Threshold: %Threshold" 
     //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
     export function function_getWindDirection_N(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): number {
 		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
@@ -497,7 +497,7 @@ namespace Muse21 {
     /**
      * To get the wind direction(Word) from three pin.
      **/
-    //% blockId="block_getWindDirection_W" block="Get the wind direction(Word) from 8-Checker Pin %temppin0 2-Checker Pin %temppin1 4-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% blockId="block_getWindDirection_W" block="Get the wind direction(Word) from |8-Checker Pin %temppin0 2-Checker Pin %temppin1 4-Checker Pin %temppin2 Threshold: %Threshold" 
     //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
     export function function_getWindDirection_W(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): string {
 		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
