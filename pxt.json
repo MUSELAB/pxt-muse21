@@ -10,6 +10,7 @@
         "README.md",
         "ns.ts",
         "muse21.ts"
+        "_locales/zh-TW/pxt-muse21-strings.json"
     ],
     "testFiles": [
         "tests.ts"
