@@ -1,0 +1,4 @@
+{
+    "Muse21|block": "Muse21",
+    "Muse21.TurnOutput|block": "設MuseLab %muselabtype| 引腳 %pin| 為 %onoff"
+}
