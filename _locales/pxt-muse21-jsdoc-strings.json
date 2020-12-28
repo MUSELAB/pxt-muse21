@@ -1,0 +1,22 @@
+{
+  "Digital_Sensor.Get_PH_VALUE": "get Get_PH_VALUE from sensor",
+  "Digital_Sensor.Get_RS485_DATAV1": "get RS485 DATA from sensor",
+  "Digital_Sensor.Get_RS485_DATAV2": "get RS485 DATA from sensor",
+  "Muse21": "Muse21 blocks",
+  "Muse21.Electrical_conductivity": "EC mudule\r\n\r\nTODO：get EC value",
+  "Muse21.Electrical_conductivity|param|temppin": "describe parameter here, eg: AnalogPin.P0",
+  "Muse21.Get_Ph": "PH mudule\r\n\r\nTODO：get PH value",
+  "Muse21.Get_Ph|param|temppin": "describe parameter here, eg: AnalogPin.P0",
+  "Muse21.Pulse_RPS": "Rotation per second\r\n\r\nTODO：Rotation per second",
+  "Muse21.Thermometer_Air": "TODO: get TMP36 Temperature(℃ or ℉)",
+  "Muse21.Thermometer_Air|param|temppin": "describe parameter here, eg: AnalogPin.P1",
+  "Muse21.Thermometer_Liquid": "NTC mudule\r\n\r\nTODO: get NTC Temperature(℃ or ℉)",
+  "Muse21.Thermometer_Liquid|param|temppin": "describe parameter here, eg: AnalogPin.P1",
+  "Muse21.function_getWindDirection_N": "Wind Direction Number\r\n\r\nTo get the wind direction(Number) from three pin.",
+  "Muse21.function_getWindDirection_W": "Wind Directtion Word\r\n\r\nTo get the wind direction(Word) from three pin.",
+  "Muse21.ping": "Send a ping and get the echo time (in microseconds) as a result",
+  "Muse21.ping|param|echo": "describe parameter here, eg: DigitalPin.P12",
+  "Muse21.ping|param|maxCmDistance": "maximum distance in centimeters (default is 500)",
+  "Muse21.ping|param|trig": "describe parameter here, eg: DigitalPin.P13",
+  "Muse21.ping|param|unit": "desired conversion unit"
+}
