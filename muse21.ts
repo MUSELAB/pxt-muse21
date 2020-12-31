@@ -754,17 +754,28 @@ namespace Digital_Sensor{
                  return ouput1(Device_address,Function_code,Start_Address_High_Byte,Start_Address_Low_Byte,Register_number_High_Byte,Register_number_Low_Byte,CRC_High_Byte,CRC_Low_Byte)
             }
    
-        /**
-        * get RS485 DATA from sensor
-        */
-       //%blockId=Get_RS485_DATAV2
-       //% block="Get_RS485_DATAV2 %DATA"
+    /**
+    * get RS485 DATA from sensor
+    */
+    //%blockId=Get_RS485_DATAV2
+    //% block="Get_RS485_DATAV2 %DATA"
        
-       //% u.defl=Get_RS485_DATAV2
-       //% weight=120	
-       //% blockGap=8
-       export function Get_RS485_DATAV2(DATA:string): string { 
+    //% u.defl=Get_RS485_DATAV2
+    //% weight=120	
+    //% blockGap=8
+    export function Get_RS485_DATAV2(DATA:string): string { 
        return change(DATA)
+    }
+
+    /**
+    * get RS485 DATA from sensor
+    */
+    //%blockId="Easy_RS485"
+    //% block="Get_RS485_DATA_in_Decimal with "PH:" at beginning"
+    //% weight=120
+    //% blockGap=8
+    export function Easy_RS485(): string { 
+        return "PH:".concat((parseInt(ouput1(1,3,0,0,0,1,132,10).substr(6,4),16)/100).toString());
     }
 
 }
