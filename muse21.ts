@@ -771,7 +771,7 @@ namespace Digital_Sensor{
     * get RS485 DATA from sensor
     */
     //%blockId="Easy_RS485"
-    //% block="Get_RS485_DATA_in_Decimal with "PH:" at beginning"
+    //% block="Get_RS485_DATA_in_Decimal with PH: at beginning"
     //% weight=120
     //% blockGap=8
     export function Easy_RS485(): string { 
