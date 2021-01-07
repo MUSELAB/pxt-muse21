@@ -459,15 +459,35 @@ namespace Muse21 {
 		let temp_pin1_value = pins.analogReadPin(parseInt(temppin1.toString()));
 		let temp_pin2_value = pins.analogReadPin(parseInt(temppin2.toString()));
 		let direction = 0;
-		if (temp_pin0_value >= Threshold) {
-            direction = direction + 1; 
-        }
-        if (temp_pin1_value >= Threshold) {
-            direction = direction + 2;
-        }
-        if (temp_pin2_value >= Threshold) {
-            direction = direction + 4;
-        }
+		if (temp_pin0_value < Threshold) {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = 0;
+				} else {
+					direction = 2;
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = 4;
+				} else {
+					direction = 6;
+				}
+			}
+		} else {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = 3;
+				} else {
+					direction = 1;
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = 5;
+				} else {
+					direction = 7;
+				}
+			}
+		}
 		return direction;
     }
 
@@ -489,11 +509,11 @@ namespace Muse21 {
 				if (temp_pin2_value < Threshold) {
 					direction = "N";
 				} else {
-					direction = "S";
+					direction = "E";
 				}
 			} else {
 				if (temp_pin2_value < Threshold) {
-					direction = "E";
+					direction = "S";
 				} else {
 					direction = "W";
 				}
@@ -501,13 +521,13 @@ namespace Muse21 {
 		} else {
 			if (temp_pin1_value < Threshold) {
 				if (temp_pin2_value < Threshold) {
-					direction = "NE";
+					direction = "SE";
 				} else {
-					direction = "SW";
+					direction = "NE";
 				}
 			} else {
 				if (temp_pin2_value < Threshold) {
-					direction = "SE";
+					direction = "SW";
 				} else {
 					direction = "NW";
 				}
