@@ -778,4 +778,74 @@ namespace Digital_Sensor{
         return "PH:".concat((parseInt(ouput1(1,3,0,0,0,1,132,10).substr(6,4),16)/100).toString());
     }
 
+    /**
+     * Wind Direction Number V2
+     **/
+    /**
+     * To get the wind direction(Number) from three pin.
+     **/
+    //% blockId="block_newGetWindDirection_N" block="Get the wind direction(Number) with new sticker from |8-Checker Pin %temppin0 4-Checker Pin %temppin1 2-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
+    export function function_getWindDirection_N(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): number {
+		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
+		let temp_pin1_value = pins.analogReadPin(parseInt(temppin1.toString()));
+		let temp_pin2_value = pins.analogReadPin(parseInt(temppin2.toString()));
+		let direction = 0;
+		if (temp_pin0_value >= Threshold) {
+            direction = direction + 1; 
+        }
+        if (temp_pin1_value >= Threshold) {
+            direction = direction + 2;
+        }
+        if (temp_pin2_value >= Threshold) {
+            direction = direction + 4;
+        }
+		return direction;
+    }
+
+    /**
+     * Wind Direction Word V2
+     **/
+    /**
+     * To get the wind direction(Word) from three pin.
+     **/
+    //% blockId="block_newGetWindDirection_W" block="Get the wind direction(Word) with new sticker from |8-Checker Pin %temppin0 4-Checker Pin %temppin1 2-Checker Pin %temppin2 Threshold: %Threshold" 
+    //% Threshold.defl=30 temppin1.defl=AnalogPin.P1 temppin2.defl=AnalogPin.P2
+    export function function_newGetWindDirection_W(temppin0: AnalogPin, temppin1: AnalogPin, temppin2: AnalogPin, Threshold: number): string {
+		let temp_pin0_value = pins.analogReadPin(parseInt(temppin0.toString()));
+		let temp_pin1_value = pins.analogReadPin(parseInt(temppin1.toString()));
+		let temp_pin2_value = pins.analogReadPin(parseInt(temppin2.toString()));
+		let direction = "";
+		if (temp_pin0_value < Threshold) {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = "N";
+				} else {
+					direction = "S";
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = "E";
+				} else {
+					direction = "W";
+				}
+			}
+		} else {
+			if (temp_pin1_value < Threshold) {
+				if (temp_pin2_value < Threshold) {
+					direction = "NE";
+				} else {
+					direction = "SW";
+				}
+			} else {
+				if (temp_pin2_value < Threshold) {
+					direction = "SE";
+				} else {
+					direction = "NW";
+				}
+			}
+		}
+		return direction;
+    }
+
 }
