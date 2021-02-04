@@ -568,11 +568,16 @@ namespace Muse21 {
     /**
      * TODO：solve the wire problem
      **/
-    //% blockId="Set Pin 12 High"
-    //% block="Set Pin 12 High"
+    //% blockId="Set_MiniBoosterPin13"
+    //% block="Set Mini Booster Pin 13 to %onoff"
     //% group="Mini Booster"
-    export function SetPin12High(){
-        pins.digitalWritePin(DigitalPin.P12,1);
+    export function SetMiniBoosterPin13(onoff: digitalonoff){
+        switch(onoff){
+            case digitalonoff.on:
+                pins.digitalWritePin(DigitalPin.P12,1);
+            case digitalonoff.off:
+                pins.digitalWritePin(DigitalPin.P13,onoff);
+        break;
     }  
 }
 
