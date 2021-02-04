@@ -577,7 +577,8 @@ namespace Muse21 {
                 pins.digitalWritePin(DigitalPin.P12,1);
             case digitalonoff.off:
                 pins.digitalWritePin(DigitalPin.P13,onoff);
-        break;
+            break;
+        }
     }  
 }
 
