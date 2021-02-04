@@ -568,10 +568,10 @@ namespace Muse21 {
     /**
      * TODO：solve the wire problem
      **/
-    //% blockId="initPin12toSupplyThePower"
-    //% block="Use Pin12 as the Power Supply of Pin13 for MuseLab Mini Booster"
+    //% blockId="Set Pin 12 High"
+    //% block="Set Pin 12 High"
     //% group="Mini Booster"
-    export function usePin12ForPowerSupplyOfPin13ForMiniBooster(){
+    export function SetPin12High(){
         pins.digitalWritePin(DigitalPin.P12,1);
     }  
 }
