@@ -536,7 +536,31 @@ namespace Muse21 {
 		return direction;
     }
     
-      
+    /**
+     * Measure the Tempature
+     **/
+    /**
+     * TODO：Measure Tempature from MLX90614
+     **/
+    //% blockId="TempMeasure"
+    //% block="Measure the Tempature from I2C with MLX90614 Sensor in ℃"
+    //% group="Sensor"
+    export function MLX90614(): number {
+        let a;
+        let b;
+        let c;
+        pins.i2cWriteNumber(
+            90,
+            7,
+            NumberFormat.Int8BE,
+            true
+        );
+        a = pins.i2cReadNumber(90, NumberFormat.UInt16LE, false) * 0.02 - 273.15;
+        b = Math.floor(a);
+        a = Math.floor((a - b) * 100);
+        c = a/100+b;
+        return c;
+    }  
 }
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Digital_Sensor{
