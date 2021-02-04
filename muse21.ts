@@ -543,7 +543,7 @@ namespace Muse21 {
      * TODO：Measure Tempature from MLX90614
      **/
     //% blockId="TempMeasure"
-    //% block="Measure the Tempature from I2C with MLX90614 Sensor in ℃"
+    //% block="Forehead Thermometer"
     //% group="Sensor"
     export function MLX90614(): number {
         let a;
