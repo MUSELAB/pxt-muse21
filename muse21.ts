@@ -560,8 +560,22 @@ namespace Muse21 {
         a = Math.floor((a - b) * 100);
         c = a/100+b;
         return c;
+    }
+    
+    /**
+     * solve the wire problem
+     **/
+    /**
+     * TODO：solve the wire problem
+     **/
+    //% blockId="initPin12toSupplyThePower"
+    //% block="Use Pin12 as the Power Supply of Pin13 for MuseLab Mini Booster"
+    //% group="Mini Booster"
+    export function usePin12ForPowerSupplyOfPin13ForMiniBooster(){
+        pins.digitalWritePin(DigitalPin.P12,1);
     }  
 }
+
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Digital_Sensor{
 
