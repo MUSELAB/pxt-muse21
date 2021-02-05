@@ -544,7 +544,7 @@ namespace Muse21 {
      **/
     //% blockId="TempMeasure"
     //% block="Forehead Thermometer"
-    //% group="Sensor"
+    //% group="Digital Sensor"
     export function MLX90614(): number {
         let a;
         let b;
