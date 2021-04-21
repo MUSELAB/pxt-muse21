@@ -400,13 +400,10 @@ namespace Muse21 {
      **/
     //% blockId="readphtemp" block="get PH value at pin %temppin"
       export function Get_Ph(temppin: AnalogPin): number {
-        let voltage = 0;
-        let phvlaue = 0;
-        
-        voltage = pins.analogReadPin(temppin);
-        voltage = voltage*3.3/1024;
-        phvlaue= 3.52*voltage-1.7688;
-        return phvlaue
+        let voltage = pins.analogReadPin(temppin);
+        // voltage = voltage*3.3/1024;
+        // phValue= 3.52*voltage-1.7688;
+        return voltage * -0.0166666667 + 19.2;
       }
 
     /**
