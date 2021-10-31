@@ -29,6 +29,17 @@ let table = [
 
 //% weight=100 color="#F59E20" icon="\uf0c3"
 namespace Muse21 {
+
+    export enum DHT11Type {
+        //% block="temperature(℃)" enumval=0
+        DHT11_temperature_C,
+
+        //% block="temperature(℉)" enumval=1
+        DHT11_temperature_F,
+
+        //% block="humidity(0~100)" enumval=2
+        DHT11_humidity,
+    }
   
     export enum inputPorts {
         //% block="P0"
